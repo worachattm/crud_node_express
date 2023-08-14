@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-const localStorage = require('../localStorage');
+const localStorage = require('../../localStorage');
 
 
 /**
- * @swagger
+ * @openapi
  * tags:
  *   name: Users
  *   description: Get all users 
- * /users:
+ * /v1/users:
  *   get:
  *     summary: Get a list of users
  *     description: Retrieve a list of users from the database
@@ -31,8 +31,8 @@ router.get('/', function(req, res, next) {
 });
 
 /**
- * @swagger
- * /users/{username}:
+ * @openapi
+ * /v1/users/{username}:
  *   get:
  *     summary: Get a user by username
  *     description: Retrieve a user from the database by ID
@@ -72,8 +72,8 @@ router.get('/:username', (req, res) => {
 });
 
 /**
- * @swagger
- * /users:
+ * @openapi
+ * /v1/users:
  *   post:
  *     summary: Create a new user
  *     description: Create a new user in the database
@@ -126,8 +126,8 @@ router.post('/', (req, res) => {
 });
 
 /**
- * @swagger
- * /users/{username}:
+ * @openapi
+ * /v1/users/{username}:
  *   put:
  *     summary: Update user details
  *     description: Update user details in the database
@@ -186,8 +186,8 @@ router.put('/:username', (req, res) => {
 
 
 /**
- * @swagger
- * /users/{username}:
+ * @openapi
+ * /v1/users/{username}:
  *   delete:
  *     summary: Delete a user
  *     description: Delete a user from the database

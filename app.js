@@ -1,17 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocs = require('./swagger'); 
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const swaggerRouter = require('./swagger'); 
 
 const apiKeyMiddleware = require('./apiKeyMiddleware'); 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var app = express();
+const usersRouter = require('./routes/v1/users');
+const usersV2Router = require('./routes/v2/users');
+const app = express();
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -19,8 +17,7 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
+app.use(swaggerRouter);
 app.use(apiKeyMiddleware); 
 
 
@@ -34,8 +31,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/v1/users', usersRouter);
+app.use('/v2/users', usersV2Router);
 
 
 // catch 404 and forward to error handler
