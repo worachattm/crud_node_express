@@ -63,6 +63,3 @@ docker run -p 3000:3000 node-api
 
 API Documentation is available at `/api-docs` after running the application
 
-## License
-
-Private
